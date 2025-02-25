@@ -4,14 +4,14 @@
 VemVerão é uma plataforma digital colaborativa que mapeia e compartilha informações em tempo real sobre praias, eventos e pontos de interesse durante o verão e carnaval de Salvador. A plataforma utiliza dados coletados automaticamente das redes sociais, complementados por contribuições dos usuários, apresentados em um mapa interativo de fácil navegação.
 
 ## Objetivos do Projeto
-1. Criar uma plataforma útil e relevante utilizando os domínios vemverao.com e vemverao.com.br
+1. Criar uma plataforma útil e relevante utilizando os domínios vemverao.com.br
 2. Oferecer informações em tempo real sobre o verão e carnaval de Salvador
 3. Estabelecer uma base de usuários através de valor imediato (dados já populados)
 4. Capturar leads para futuras expansões do projeto
 
 ## Stack Tecnológico
 - **Backend**: Laravel (PHP)
-- **Frontend**: Vue.js/Nuxt.js
+- **Frontend**: Laravel Vue Starter Kit (Vue, InertiaJS e TailwindCSS)
 - **Banco de Dados**: MySQL
 - **Mapa**: Google My Maps (inicial) / Leaflet.js (posterior)
 - **Hospedagem**: VPS KingHost
