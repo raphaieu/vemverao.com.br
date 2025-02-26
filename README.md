@@ -10,9 +10,9 @@ VemVerão é uma plataforma digital colaborativa que mapeia e compartilha inform
 4. Capturar leads para futuras expansões do projeto
 
 ## Stack Tecnológico
-- **Backend**: Laravel (PHP)
-- **Frontend**: Laravel Vue Starter Kit (Vue, InertiaJS e TailwindCSS)
-- **Banco de Dados**: MySQL
+- **Backend**: Laravel v11.44.0 (PHP v8.3.17)
+- **Frontend**: Laravel Vue Starter Kit (Vue, InertiaJS e TailwindCSS) - The Vue starter kit utiliza o Vue Composition API, TypeScript, Tailwind, e a biblioteca de componentes shadcn-vue
+- **Banco de Dados**: PostgreSQL com PostGIS
 - **Mapa**: Google My Maps (inicial) / Leaflet.js (posterior)
 - **Hospedagem**: VPS KingHost
 
@@ -36,6 +36,17 @@ VemVerão é uma plataforma digital colaborativa que mapeia e compartilha inform
    - Definição das tabelas e relações
    - Criação das migrações e modelos
 
+4. WebScraping com Apify
+   - Implementação de coleta de dados do Instagram (hashtags relevantes)
+   - Implementação de coleta de dados do Twitter/X
+   - Sistema de processamento e classificação dos dados
+     Conceito: Staging Area
+     Fluxo de Processamento:
+     - Coleta bruta
+     - Armazenamento integral
+     - Processamento assíncrono
+     - Filtragem e classificação posterior
+     
 #### Semana 2: Frontend Básico e Integração
 1. Desenvolvimento do Frontend Minimal
    - Layout responsivo mobile-first
