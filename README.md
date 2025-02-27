@@ -1,19 +1,19 @@
 # Documento de Projeto - VemVerão
 
 ## Visão Geral
-VemVerão é uma plataforma digital colaborativa que mapeia e compartilha informações em tempo real sobre praias, eventos e pontos de interesse durante o verão e carnaval de Salvador. A plataforma utiliza dados coletados automaticamente das redes sociais, complementados por contribuições dos usuários, apresentados em um mapa interativo de fácil navegação.
+VemVerão é uma plataforma digital colaborativa que mapeia e compartilha informações do dia sobre praias, eventos e pontos de interesse durante o verão e carnaval de Brasil (especialmente Salvador - BA, pois é onde estou começando). A plataforma utiliza dados coletados automaticamente das redes sociais, complementados por contribuições dos usuários, apresentados em um mapa interativo de fácil navegação.
 
 ## Objetivos do Projeto
-1. Criar uma plataforma útil e relevante utilizando os domínios vemverao.com.br
-2. Oferecer informações em tempo real sobre o verão e carnaval de Salvador
+1. Criar uma plataforma útil e relevante utilizando o domínio vemverao.com.br
+2. Oferecer informações em tempo real (com delay de algumas horas) sobre o verão e carnaval do Brasil
 3. Estabelecer uma base de usuários através de valor imediato (dados já populados)
 4. Capturar leads para futuras expansões do projeto
 
 ## Stack Tecnológico
 - **Backend**: Laravel v11.44.0 (PHP v8.3.17)
-- **Frontend**: Laravel Vue Starter Kit (Vue, InertiaJS e TailwindCSS) - The Vue starter kit utiliza o Vue Composition API, TypeScript, Tailwind, e a biblioteca de componentes shadcn-vue
+- **Frontend**: Laravel Vue Starter Kit (Vue, InertiaJS e TailwindCSS) - o Vue starter kit utiliza o Vue Composition API, TypeScript, Tailwind, e a biblioteca de componentes shadcn-vue
 - **Banco de Dados**: PostgreSQL com PostGIS
-- **Mapa**: Google My Maps (inicial) / Leaflet.js (posterior)
+- **Mapa**: Leaflet.js
 - **Hospedagem**: VPS KingHost
 
 ## Cronograma de Desenvolvimento
@@ -24,7 +24,7 @@ VemVerão é uma plataforma digital colaborativa que mapeia e compartilha inform
 1. Configuração do ambiente de desenvolvimento
    - Criação do projeto Laravel
    - Configuração do banco de dados
-   - Setup inicial do frontend Vue/Nuxt
+   - Setup inicial do frontend
 
 2. Desenvolvimento do Crawler Básico
    - Implementação de coleta de dados do Instagram (hashtags relevantes)
@@ -51,10 +51,10 @@ VemVerão é uma plataforma digital colaborativa que mapeia e compartilha inform
 1. Desenvolvimento do Frontend Minimal
    - Layout responsivo mobile-first
    - Componentes básicos (header, footer, cards)
-   - Integração com Google My Maps
+   - Integração com Leaflet.js
 
 2. Integração do Mapa
-   - Incorporação do Google My Maps
+   - Incorporação do Leaflet.js
    - Exibição dos pontos coletados pelo crawler
    - Pop-ups informativos
 
@@ -102,11 +102,10 @@ VemVerão é uma plataforma digital colaborativa que mapeia e compartilha inform
    - Ranking de contribuidores
 
 ### Fase 3: Melhorias e Expansão (Contínuo)
-1. Transição para Leaflet.js
-   - Implementação de mapa personalizado
+1. Leaflet.js
    - Funcionalidades avançadas de filtragem
 
-2. Melhorias no Crawler
+2. Melhorias na curadoria dos dados da Staing Area
    - Integração com IA para melhor classificação
    - Análise de sentimento e extração de informações
 
@@ -127,7 +126,7 @@ O crawler apresenta alguns desafios importantes a considerar:
 
 2. **Classificação de Conteúdo**:
    - Identificar se o post é sobre praia, evento, etc.
-   - Extrair localização de textos e hashtags
+   - Extrair localização (latitude e longitude) dos posts com Localização - Google Maps
    - Filtrar conteúdo irrelevante
 
 3. **Questões Legais**:
@@ -135,31 +134,20 @@ O crawler apresenta alguns desafios importantes a considerar:
    - Conformidade com LGPD
    - Termos de serviço das plataformas
 
-### Abordagens para o Crawler
+### Abordagens para Coleta dos Dados
 
-#### Opção 1: API Oficial + IA Simples
+#### Apify + Contribuições (Híbrido)
 ```
 - Solicitar acesso às APIs oficiais
+- Coleta manual inicial para popular o mapa
 - Processar textos com classificação básica
 - Armazenar apenas metadados e links
-```
-
-#### Opção 2: Web Scraping Limitado
-```
-- Scrape de páginas públicas de hashtags
-- Coleta apenas de dados básicos
 - Sistema de exclusão a pedido
-```
-
-#### Opção 3: Híbrida com Contribuições Iniciais
-```
-- Coleta manual inicial para popular o mapa
-- Crawler complementar para novidades
 - Transição gradual para contribuições dos usuários
 ```
 
-### Estratégia de Implementação Recomendada
-Começar com uma abordagem híbrida:
+### Estratégia de Implementação
+Abordagem híbrida:
 
 1. Criar uma base inicial de dados manualmente para garantir conteúdo de qualidade no lançamento
 2. Implementar crawler limitado focado em hashtags específicas e públicas
@@ -275,12 +263,12 @@ Começar com uma abordagem híbrida:
 ### Recursos Técnicos Necessários
 - VPS KingHost (já disponível)
 - Domínios vemverao.com e vemverao.com.br (já disponíveis)
-- Acesso às APIs sociais (a adquirir)
+- Acesso à API sociais (a adquirir) - especialmente para o Login Social
 - Serviços de IA para classificação (a avaliar)
 
 ### Recursos Humanos
 - Desenvolvedor Backend (PHP/Laravel)
-- Desenvolvedor Frontend (Vue/Nuxt)
+- Desenvolvedor Frontend (Vue Starter Kit do Laravel)
 - Designer UI/UX para mockups iniciais
 - Moderador de conteúdo (pós-lançamento)
 
