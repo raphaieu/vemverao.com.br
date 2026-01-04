@@ -1,281 +1,116 @@
-# Documento de Projeto - VemVerão
+# Vem Verão Wrapped - MVP
 
-## Visão Geral
-VemVerão é uma plataforma digital colaborativa que mapeia e compartilha informações do dia sobre praias, eventos e pontos de interesse durante o verão e carnaval de Brasil (especialmente Salvador - BA, pois é onde estou começando). A plataforma utiliza dados coletados automaticamente das redes sociais, complementados por contribuições dos usuários, apresentados em um mapa interativo de fácil navegação.
+Quiz interativo estilo "Spotify Wrapped" para o verão brasileiro.
 
-## Objetivos do Projeto
-1. Criar uma plataforma útil e relevante utilizando o domínio vemverao.com.br
-2. Oferecer informações em tempo real (com delay de algumas horas) sobre o verão e carnaval do Brasil
-3. Estabelecer uma base de usuários através de valor imediato (dados já populados)
-4. Capturar leads para futuras expansões do projeto
+## 🚀 Stack Tecnológica
 
-## Stack Tecnológico
-- **Backend**: Laravel v11.44.0 (PHP v8.3.17)
-- **Frontend**: Laravel Vue Starter Kit (Vue, InertiaJS e TailwindCSS) - o Vue starter kit utiliza o Vue Composition API, TypeScript, Tailwind, e a biblioteca de componentes shadcn-vue
-- **Banco de Dados**: PostgreSQL com PostGIS
-- **Mapa**: Leaflet.js
-- **Hospedagem**: VPS KingHost
+- **Frontend**: Next.js 14+ (App Router) com React, TypeScript, TailwindCSS
+- **Backend**: Next.js API Routes (serverless)
+- **Banco de Dados**: PostgreSQL
+- **ORM**: Prisma
+- **Autenticação**: NextAuth.js (Google, Facebook)
+- **IA**: OpenAI API (GPT-3.5/GPT-4)
+- **Imagens**: html2canvas para gerar PNG compartilhável
 
-## Cronograma de Desenvolvimento
+## 📋 Pré-requisitos
 
-### Fase 1: MVP com Crawler (2-3 semanas)
+- Node.js 18+ (recomendado: LTS)
+- PostgreSQL
+- Conta OpenAI (para geração de textos)
+- Contas OAuth (Google, Facebook) - opcional para desenvolvimento
 
-#### Semana 1: Setup e Desenvolvimento do Crawler
-1. Configuração do ambiente de desenvolvimento
-   - Criação do projeto Laravel
-   - Configuração do banco de dados
-   - Setup inicial do frontend
+## 🛠️ Instalação
 
-2. Desenvolvimento do Crawler Básico
-   - Implementação de coleta de dados do Instagram (hashtags relevantes)
-   - Implementação de coleta de dados do Twitter/X
-   - Sistema de processamento e classificação dos dados
-   - Cronograma de execução automatizada
-
-3. Modelagem de Dados
-   - Definição das tabelas e relações
-   - Criação das migrações e modelos
-
-4. WebScraping com Apify
-   - Implementação de coleta de dados do Instagram (hashtags relevantes)
-   - Implementação de coleta de dados do Twitter/X
-   - Sistema de processamento e classificação dos dados
-     Conceito: Staging Area
-     Fluxo de Processamento:
-     - Coleta bruta
-     - Armazenamento integral
-     - Processamento assíncrono
-     - Filtragem e classificação posterior
-     
-#### Semana 2: Frontend Básico e Integração
-1. Desenvolvimento do Frontend Minimal
-   - Layout responsivo mobile-first
-   - Componentes básicos (header, footer, cards)
-   - Integração com Leaflet.js
-
-2. Integração do Mapa
-   - Incorporação do Leaflet.js
-   - Exibição dos pontos coletados pelo crawler
-   - Pop-ups informativos
-
-3. Rankings e Listas
-   - Implementação das listas de "mais populares"
-   - Sistema de exibição de "últimas atualizações"
-
-#### Semana 3: Testes e Lançamento do MVP
-1. Testes de Carga e Performance
-   - Teste do crawler em produção
-   - Otimização de consultas ao banco de dados
-   - Cache para reduzir carregamento do servidor
-
-2. Configuração de Produção
-   - Deploy para o servidor VPS na KingHost
-   - Configuração de domínios e certificados SSL
-   - Setup de monitoramento básico
-
-3. Lançamento do MVP
-   - Publicação da versão inicial
-   - Monitoramento e ajustes iniciais
-
-### Fase 2: Autenticação e Contribuição do Usuário (2 semanas)
-
-#### Semana 4: Sistema de Autenticação
-1. Implementação de Login Social
-   - Integração com Laravel Socialite
-   - Suporte para login com Instagram, Google, Facebook
-   - Painel do usuário básico
-
-2. Captura de Leads
-   - Formulários de coleta de informações adicionais
-   - Sistema de consentimento e privacidade
-   - Armazenamento seguro dos dados
-
-#### Semana 5: Sistema de Contribuição
-1. Funcionalidades de Contribuição
-   - Upload de fotos com geolocalização
-   - Sistema de comentários e avaliações
-   - Validação de conteúdo
-
-2. Gamificação
-   - Sistema de pontos por contribuição
-   - Badges para usuários ativos
-   - Ranking de contribuidores
-
-### Fase 3: Melhorias e Expansão (Contínuo)
-1. Leaflet.js
-   - Funcionalidades avançadas de filtragem
-
-2. Melhorias na curadoria dos dados da Staing Area
-   - Integração com IA para melhor classificação
-   - Análise de sentimento e extração de informações
-
-3. Novas Funcionalidades
-   - Blog com dicas de verão
-   - Sistema de alertas por email/push
-   - Integração com mais fontes de dados
-
-## Detalhamento Técnico do Crawler
-
-### Desafios Técnicos
-O crawler apresenta alguns desafios importantes a considerar:
-
-1. **Limitações de API**:
-   - Instagram: API Graph requer aprovação da Meta
-   - Twitter: Limites de taxa na API gratuita
-   - Alternativas: Web scraping (com riscos legais)
-
-2. **Classificação de Conteúdo**:
-   - Identificar se o post é sobre praia, evento, etc.
-   - Extrair localização (latitude e longitude) dos posts com Localização - Google Maps
-   - Filtrar conteúdo irrelevante
-
-3. **Questões Legais**:
-   - Uso de conteúdo público (atribuição necessária)
-   - Conformidade com LGPD
-   - Termos de serviço das plataformas
-
-### Abordagens para Coleta dos Dados
-
-#### Apify + Contribuições (Híbrido)
-```
-- Solicitar acesso às APIs oficiais
-- Coleta manual inicial para popular o mapa
-- Processar textos com classificação básica
-- Armazenar apenas metadados e links
-- Sistema de exclusão a pedido
-- Transição gradual para contribuições dos usuários
+1. Clone o repositório
+2. Instale as dependências:
+```bash
+npm install
 ```
 
-### Estratégia de Implementação
-Abordagem híbrida:
-
-1. Criar uma base inicial de dados manualmente para garantir conteúdo de qualidade no lançamento
-2. Implementar crawler limitado focado em hashtags específicas e públicas
-3. Adicionar sistema de contribuição de usuários rapidamente para reduzir dependência do crawler
-4. Usar IA simples para classificação (serviços como TextRazor, MonkeyLearn)
-
-## Sistema de Login Social e Captura de Leads
-
-### Fluxo de Autenticação
-1. Usuário clica em "Login com Instagram/Google/Facebook"
-2. Usuário autoriza o acesso através do provedor escolhido
-3. VemVerão recebe token de autenticação
-4. Sistema verifica se o usuário já existe no banco de dados
-5. Se novo, solicita informações adicionais (captura de lead)
-6. Cria/recupera sessão do usuário
-
-### Informações de Lead
-- Email (obrigatório)
-- Número de telefone (opcional)
-- Bairro onde mora (opcional)
-- Interesses (praias, festas, gastronomia)
-- Consentimento para receber notificações
-
-### Implementação Técnica
-```
-- Laravel Socialite para integração com provedores
-- Sistema de permissões baseado em papéis
-- Banco de dados normalizado para armazenamento
-- Conformidade com LGPD (política de privacidade clara)
+3. Configure as variáveis de ambiente:
+```bash
+cp .env.example .env
 ```
 
-## Design e UX
+Edite o `.env` com suas credenciais:
+- `DATABASE_URL`: URL de conexão do PostgreSQL
+- `NEXTAUTH_URL`: URL da aplicação (ex: http://localhost:3000)
+- `NEXTAUTH_SECRET`: Chave secreta (gere com `openssl rand -base64 32`)
+- `GOOGLE_CLIENT_ID` e `GOOGLE_CLIENT_SECRET`: Credenciais do Google OAuth
+- `FACEBOOK_CLIENT_ID` e `FACEBOOK_CLIENT_SECRET`: Credenciais do Facebook OAuth
+- `OPENAI_API_KEY`: Chave da API OpenAI
 
-### Pilares de Design
-1. **Simplicidade**: Interface clean, fácil de usar na praia (sob o sol)
-2. **Velocidade**: Carregamento rápido em conexões móveis variáveis
-3. **Utilidade**: Priorizar informações úteis em tempo real
-4. **Colaboração**: Destacar contribuições de usuários
+4. Configure o banco de dados:
+```bash
+npx prisma generate
+npx prisma db push
+```
 
-### Componentes Principais da Interface
-1. **Mapa Central**: Ocupa maior parte da tela, com marcadores coloridos
-2. **Filtros Simples**: Botões grandes para filtrar (Praias, Eventos, Alertas)
-3. **Rankings Laterais**: Em formato de lista, fácil de escanear
-4. **Barra de Busca**: Para encontrar lugares específicos
-5. **Feed de Atualizações**: Últimas informações adicionadas
+5. Inicie o servidor de desenvolvimento:
+```bash
+npm run dev
+```
 
-## Métricas de Sucesso
+Acesse [http://localhost:3000](http://localhost:3000)
 
-### Métricas-Chave de Desempenho (KPIs)
-1. **Crescimento**:
-   - Usuários únicos diários
-   - Taxas de retorno
-   - Leads capturados
+## 📁 Estrutura do Projeto
 
-2. **Engajamento**:
-   - Tempo na plataforma
-   - Visualizações do mapa
-   - Cliques em pontos
+```
+vemverao.com.br/
+├── app/                    # Next.js App Router
+│   ├── api/               # API Routes
+│   ├── quiz/              # Página do quiz
+│   ├── results/           # Página de resultados
+│   ├── share/             # Página de compartilhamento
+│   └── login/             # Página de login
+├── components/            # Componentes React
+│   ├── quiz/              # Componentes do quiz
+│   ├── dashboard/        # Componentes do dashboard
+│   └── share/             # Componentes de compartilhamento
+├── lib/                   # Utilitários e lógica
+│   ├── quiz/              # Lógica do quiz
+│   ├── scoring/            # Sistema de scoring
+│   ├── ai/                # Integração com IA
+│   └── auth.ts            # Configuração NextAuth
+├── prisma/                # Schema e migrações
+└── types/                 # Tipos TypeScript
+```
 
-3. **Contribuição**:
-   - Uploads de usuários
-   - Comentários/avaliações
-   - Usuários cadastrados
+## 🎯 Funcionalidades
 
-### Objetivos de Curto Prazo (1 mês)
-- 1000+ usuários únicos
-- 200+ leads capturados
-- 50+ contribuições de usuários
+### MVP Implementado
 
-### Objetivos de Médio Prazo (3 meses)
-- 5000+ usuários únicos mensais
-- 1000+ leads capturados
-- 50% do conteúdo gerado por usuários
+- ✅ Quiz interativo com 6 blocos de perguntas
+- ✅ Sistema de scoring (0-100)
+- ✅ Sistema de badges
+- ✅ Sistema de arquétipos
+- ✅ Dashboard de resultados
+- ✅ Geração de textos com IA (OpenAI)
+- ✅ Imagem compartilhável (PNG)
+- ✅ Autenticação obrigatória (Google, Facebook)
 
-## Riscos e Mitigações
+### Próximas Funcionalidades
 
-### Riscos Técnicos
-1. **Crawler Bloqueado**:
-   - Mitigação: Diversificar fontes, ter plano B manual
-   - Contingência: Foco em contribuições de usuários
+- [ ] Vídeo compartilhável (12-20s)
+- [ ] Comparação de resultados
+- [ ] Rankings gerais
+- [ ] Sistema de gamificação
+- [ ] Analytics
 
-2. **Problemas de Performance**:
-   - Mitigação: Otimização de consultas, cache agressivo
-   - Contingência: Limitar recursos mais pesados
+## 📝 Notas
 
-3. **Segurança**:
-   - Mitigação: Manter Laravel atualizado, validar inputs
-   - Contingência: Monitoramento regular, backups frequentes
+- O projeto está configurado para PostgreSQL, mas pode ser adaptado para SQLite em desenvolvimento
+- A geração de imagens usa html2canvas no cliente
+- Os textos da IA são gerados sob demanda e armazenados no banco
+- O sistema de scoring é baseado em pesos configuráveis
 
-### Riscos de Negócio
-1. **Baixa Adoção**:
-   - Mitigação: Garantir valor inicial com dados pré-populados
-   - Contingência: Ajustar estratégia para micro-nichos
+## 🔒 LGPD
 
-2. **Conteúdo Inapropriado**:
-   - Mitigação: Moderação inicial, sistema de denúncias
-   - Contingência: Ferramentas de moderação automatizada
+- Implementar política de privacidade
+- Implementar termos de uso
+- Garantir consentimento do usuário
 
-## Próximos Passos
+## 📄 Licença
 
-1. **Imediatos**:
-   - Definir hashtags para monitoramento
-   - Criar mockups detalhados da interface
-   - Setup do ambiente de desenvolvimento
+MIT
 
-2. **Decisões Pendentes**:
-   - Abordagem final do crawler
-   - Estratégia inicial de marketing
-   - Escolha de provedores de login social
-
-## Orçamento e Recursos
-
-### Recursos Técnicos Necessários
-- VPS KingHost (já disponível)
-- Domínios vemverao.com e vemverao.com.br (já disponíveis)
-- Acesso à API sociais (a adquirir) - especialmente para o Login Social
-- Serviços de IA para classificação (a avaliar)
-
-### Recursos Humanos
-- Desenvolvedor Backend (PHP/Laravel)
-- Desenvolvedor Frontend (Vue Starter Kit do Laravel)
-- Designer UI/UX para mockups iniciais
-- Moderador de conteúdo (pós-lançamento)
-
----
-
-## Conclusão
-
-O projeto VemVerão tem potencial para se tornar uma ferramenta útil para moradores e turistas de Salvador durante o verão e carnaval. Com uma abordagem técnica sensata e um foco em valor imediato, é possível lançar rapidamente uma versão inicial que já ofereça utilidade, enquanto se estabelece a base para crescimento orgânico e contribuições dos usuários.
-
-A estratégia de desenvolvimento em fases permite ajustes rápidos baseados no feedback dos primeiros usuários, garantindo que a plataforma evolua de acordo com as necessidades reais do público-alvo.
